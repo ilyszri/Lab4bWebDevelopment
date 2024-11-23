@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Collection</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Book Collection Details</h1>
+    <div id="output"></div>
+
+    <script>
+        $(document).ready(function() {
+            const books = [
+                {
+                    "title": "The Great Gatsby",
+                    "author": "F. Scott Fitzgerald",
+                    "publicationYear": 1925,
+                    "genres": ["Fiction", "Classics"]
+                },
+                {
+                    "title": "To Kill a Mockingbird",
+                    "author": "Harper Lee",
+                    "publicationYear": 1960,
+                    "genres": ["Fiction", "Coming-of-Age"]
+                }
+            ];
+
+            // (a) Display the title of the first book
+            const firstBookTitle = books[0].title;
+            $("#output").append(`<p>Title of the first book: ${firstBookTitle}</p>`);
+
+            // (b) Display the author of the second book
+            const secondBookAuthor = books[1].author;
+            $("#output").append(`<p>Author of the second book: ${secondBookAuthor}</p>`);
+
+            // (c) Display the genres of all books
+            const allGenres = books.map(book => book.genres).flat();
+            $("#output").append(`<p>Genres of all books: ${allGenres.join(", ")}</p>`);
+        });
+    </script>
+</body>
+</html>
