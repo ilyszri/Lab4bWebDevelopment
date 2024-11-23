@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Collection</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, 'Times New Roman', Times, serif, serif, sans-serif;
+        }
+        #output {
+            margin-top: 20px;
+        }
+        .highlight {
+            color: rgb(8, 8, 177);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Book Collection Details</h1>
+    <p id="book1-title"></p>
+    <p id="book2-author"></p>
+    <p id="book-genres"></p>
+
     <div id="output"></div>
 
     <script>
-        $(document).ready(function() {
-            const books = [
+        $(document).ready(function () {
+            // Load JSON data from the file (simulated as an inline JSON object for demo)
+            const jsonData = `
+            [
                 {
                     "title": "The Great Gatsby",
                     "author": "F. Scott Fitzgerald",
@@ -23,19 +43,23 @@
                     "publicationYear": 1960,
                     "genres": ["Fiction", "Coming-of-Age"]
                 }
-            ];
+            ]`;
 
+            // Parse the JSON string
+            const books = JSON.parse(jsonData);
+
+            // Update DOM elements dynamically
             // (a) Display the title of the first book
-            const firstBookTitle = books[0].title;
-            $("#output").append(`<p>Title of the first book: ${firstBookTitle}</p>`);
+            $("#book1-title").html(`<span class="highlight">Title of the first book:</span> ${books[0].title}`);
 
             // (b) Display the author of the second book
-            const secondBookAuthor = books[1].author;
-            $("#output").append(`<p>Author of the second book: ${secondBookAuthor}</p>`);
+            $("#book2-author").html(`<span class="highlight">Author of the second book:</span> ${books[1].author}`);
 
+            // Extract and display genres
             // (c) Display the genres of all books
-            const allGenres = books.map(book => book.genres).flat();
-            $("#output").append(`<p>Genres of all books: ${allGenres.join(", ")}</p>`);
+            const genres = books.flatMap(book => book.genres);
+            const uniqueGenres = [...new Set(genres)]; // Remove duplicates
+            $("#book-genres").html(`<span class="highlight">Genres of all books:</span> ${uniqueGenres.join(", ")}`);
         });
     </script>
 </body>
